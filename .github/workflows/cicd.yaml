@@ -71,6 +71,8 @@
         - name: Build Docker image
           run: |  
             echo "${{ vars.ENV_FILE }}" > .env   
+            ls-ls
+            cat .env
             docker build -t netflix_backend:latest .
 
 # name: Build Docker Image
