@@ -1,8 +1,7 @@
-<<<<<<< HEAD
+
 # name: Build and push docker image
-=======
-name: Build and push docker image.
->>>>>>> d8a5b3ee8c7657fe35ddac8408bfbcd6a3f1dd67
+#=======
+#name: Build and push docker image.
 
 # on:
 #   push:
