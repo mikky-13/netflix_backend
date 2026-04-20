@@ -69,7 +69,8 @@
         - name: Build with Maven
           run: ./mvnw clean package -DskipTests
         - name: Build Docker image
-          run: |            
+          run: |  
+            echo "${{ vars.ENV_FILE }}" > .env   
             docker build -t netflix_backend:latest .
 
 # name: Build Docker Image
