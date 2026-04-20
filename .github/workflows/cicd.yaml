@@ -54,9 +54,47 @@
       steps:
         - name: Check out the repository
           uses: actions/checkout@v2
+        # 1. This step installs Java so GitHub can run Maven
+        - name: Set up JDK 25
+          uses: actions/setup-java@v4
+          with:
+            java-version: '25'
+            distribution: 'temurin'
+            cache: maven
+        # 2. This step creates the missing japp.jar file
+        - name: Build with Maven
+          run: ./mvnw clean package -DskipTests
         - name: Build Docker image
           run: |            
             docker build -t netflix_backend:latest .
 
+# name: Build Docker Image
+# on:
+#   push:
+#     branches: [ main ]
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Check out the repository
+#         uses: actions/checkout@v4
+
+#       # 1. This step installs Java so GitHub can run Maven
+#       - name: Set up JDK 25
+#         uses: actions/setup-java@v4
+#         with:
+#           java-version: '25'
+#           distribution: 'temurin'
+#           cache: maven
+
+#       # 2. This step creates the missing japp.jar file
+#       - name: Build with Maven
+#         run: ./mvnw clean package -DskipTests
+
+#       # 3. Now Docker will find the file it needs
+#       - name: Build Docker image
+#         run: |
+#           docker build -t netflix_backend:latest .
 
 
