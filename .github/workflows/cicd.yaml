@@ -67,7 +67,7 @@
 
         # 2. This step creates the missing japp.jar file
         - name: Build with Maven
-          run: ./mvnw clean package -DskipTests
+          run: ./mvnw clean package #-DskipTests
         - name: Build Docker image
           run: |  
             echo "${{ vars.ENV_FILE }}" > .env   
