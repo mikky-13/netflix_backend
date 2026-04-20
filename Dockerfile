@@ -31,7 +31,7 @@
 # ==================
  FROM eclipse-temurin:25
  RUN mkdir /opt/app
- COPY japp.jar /opt/app
+ #COPY japp.jar /opt/app
  COPY target/*.jar /opt/app/japp.jar
  EXPOSE 8080
  CMD ["java", "-jar", "/opt/app/japp.jar"]
