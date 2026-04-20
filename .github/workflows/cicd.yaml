@@ -55,9 +55,8 @@
         - name: Check out the repository
           uses: actions/checkout@v2
         - name: Build Docker image
-          run: |
-            hostnamectl
-          #  docker build -t netflix_backend:latest .
+          run: |            
+            docker build -t netflix_backend:latest .
 
 
 
