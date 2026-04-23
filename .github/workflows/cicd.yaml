@@ -48,6 +48,12 @@
     push:
        branches: [ main ]
 
+     #This workflow is triggered on a push to the main branch. It checks out the code, logs into Azure using credentials stored in GitHub Secrets, sets up Java, builds the application with Maven, and then builds a Docker image.
+  permissions:
+    id-token: write
+    contents: read
+
+
   jobs:
     build:
       runs-on: ubuntu-latest
@@ -59,7 +65,7 @@
         - name: Login to Azure
           uses: azure/login@v1
           with:
-              client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+              #client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
               client-id: ${{ secrets.AZURE_CLIENT_ID }}
               tenant-id: ${{ secrets.AZURE_TENANT_ID }}
               subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
