@@ -46,7 +46,7 @@
 
   on:
     push:
-       branches: [ main ]
+       branches: [ main , Mikky_Movies ] 
 
      #This workflow is triggered on a push to the main branch. It checks out the code, logs into Azure using credentials stored in GitHub Secrets, sets up Java, builds the application with Maven, and then builds a Docker image.
   permissions:
