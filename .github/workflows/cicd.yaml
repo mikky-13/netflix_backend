@@ -60,18 +60,20 @@
       steps:
         - name: Check out the repository
           uses: actions/checkout@v4
-        
-          # This step logs into Azure using the credentials stored in GitHub Secrets. This is necessary for any subsequent steps that interact with Azure services, such as pushing the Docker image to Azure Container Registry (ACR) or deploying to Azure Kubernetes Service (AKS).
-        - name: Login to Azure
-          uses: azure/login@v1
+    
+        - name: configure AWS credentials 
+          uses: aws-actions/configure-aws-credentials@v1
           with:
-              #client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
-              client-id: ${{ secrets.AZURE_CLIENT_ID }}
-              tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-              subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+              aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY}}
+              aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+              aws-region: ${{ secrets.AWS_REGION }}
+              
+        
+              
 
-        - name: Login to acr
-          run: az acr login --name ${{ secrets.ACR_NAME }}
+        - name: Login to ECR
+          id: login-ecr
+          uses: aws-actions/amazon-ecr-login@v1
 
           #uses: azure/docker-login@v1
           #with:
@@ -101,15 +103,14 @@
         - name: Build Docker image
           run: |  
             echo "${{ vars.APPLICATION_PROPERTIES }}" > application.properties  
-            ls -la
-            cat application.properties
+            # ls -la
+            # cat application.properties
             docker build -t netflix_backend:latest .
 
         - name: Docker push
           run: |
-            docker build . -t ${{ secrets.ACR_NAME }}.azurecr.io/netflix-backend:latest
-            docker push ${{ secrets.ACR_NAME }}.azurecr.io/netflix-backend:latest
-
+            docker tag netflix_backend:latest ${{ secrets.AWS_ACCOUNT_ID}}.dkr.ecr.us-east-2.amazonaws.com/netflix_backend:${GITHUB_RUN_NUMBER}
+            docker push ${{ secrets.AWS_ACCOUNT_ID}}.dkr.ecr.us-east-2.amazonaws.com/netflix_backend:${GITHUB_RUN_NUMBER}
 
 # name: Build Docker Image
 # on:
