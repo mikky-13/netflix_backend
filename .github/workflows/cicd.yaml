@@ -42,7 +42,7 @@
 #         docker tag netflix_backend:latest 348230509416.dkr.ecr.us-east-2.amazonaws.com/netflix_backend:${GITHUB_RUN_NUMBER}
 #         docker push 348230509416.dkr.ecr.us-east-2.amazonaws.com/netflix_backend:${GITHUB_RUN_NUMBER}
 
-  name: Build Docker Image
+  name: Build and push Docker Image
 
   on:
     push:
