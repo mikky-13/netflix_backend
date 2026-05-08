@@ -102,15 +102,13 @@
           run: ./mvnw clean package 
         - name: Build Docker image
           run: |  
-            echo "${{ vars.APPLICATION_PROPERTIES }}" > application.properties  
-            # ls -la
-            # cat application.properties
+            echo "${{ vars.APPLICATION_PROPERTIES }}" > application.properties
             docker build -t netflix_backend:latest .
 
         - name: Docker push
           run: |
-            #docker tag netflix_backend:latest ${{ secrets.AWS_ACCOUNT_ID}}.dkr.ecr.eu-north-1.amazonaws.com/netflix_backend:${GITHUB_RUN_NUMBER}
-            #docker push ${{ secrets.AWS_ACCOUNT_ID}}.dkr.ecr.eu-north-1.amazonaws.com/netflix_backend:${GITHUB_RUN_NUMBER}
+            docker tag netflix_backend:latest ${{ secrets.AWS_ACCOUNT_ID}}.dkr.ecr.eu-north-1.amazonaws.com/netflix_backend:${GITHUB_RUN_NUMBER}
+            docker push ${{ secrets.AWS_ACCOUNT_ID}}.dkr.ecr.eu-north-1.amazonaws.com/netflix_backend:${GITHUB_RUN_NUMBER}
 
 # name: Build Docker Image
 # on:
