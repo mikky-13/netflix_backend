@@ -110,7 +110,7 @@
             docker tag netflix_backend:latest ${{ secrets.AWS_ACCOUNT_ID}}.dkr.ecr.eu-north-1.amazonaws.com/netflix_backend:${GITHUB_RUN_NUMBER}
             docker push ${{ secrets.AWS_ACCOUNT_ID}}.dkr.ecr.eu-north-1.amazonaws.com/netflix_backend:${GITHUB_RUN_NUMBER}
 
-# name: Build Docker Image
+
 # on:
 #   push:
 #     branches: [ main ]
